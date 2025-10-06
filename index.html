@@ -61,6 +61,8 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
         .logo {
@@ -71,21 +73,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
             font-weight: bold;
             color: var(--son-green);
             font-size: 1.8rem;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+        
+        .header-text {
+            flex: 1;
+            min-width: 300px;
         }
         
         h1 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             margin-bottom: 10px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
         
         .meeting-title {
-            font-size: 1.4rem;
+            font-size: clamp(1rem, 3vw, 1.4rem);
             margin-bottom: 5px;
             font-weight: 600;
         }
@@ -213,6 +227,14 @@
             border-left: 4px solid var(--son-gold);
         }
         
+        .prayer-text {
+            margin-bottom: 15px;
+        }
+        
+        .prayer-text p {
+            margin-bottom: 10px;
+        }
+        
         footer {
             text-align: center;
             margin-top: 30px;
@@ -228,19 +250,53 @@
             font-size: 1.1rem;
         }
         
+        /* Responsive table for mobile */
         @media (max-width: 768px) {
             .agenda-table {
                 display: block;
                 overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .agenda-table thead {
+                display: none;
+            }
+            
+            .agenda-table tr {
+                display: block;
+                margin-bottom: 15px;
+                border: 1px solid var(--son-border);
+                border-radius: 8px;
+                padding: 10px;
+            }
+            
+            .agenda-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 10px;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .agenda-table td:last-child {
+                border-bottom: none;
+            }
+            
+            .agenda-table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: var(--son-green);
+                margin-right: 10px;
+                flex: 0 0 100px;
             }
             
             .logo-container {
                 flex-direction: column;
+                text-align: center;
             }
             
-            .logo {
-                margin-right: 0;
-                margin-bottom: 10px;
+            .header-text {
+                min-width: auto;
             }
             
             h1 {
@@ -249,6 +305,33 @@
             
             .meeting-title {
                 font-size: 1.1rem;
+            }
+            
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 20px 0;
+            }
+            
+            .meeting-details, .agenda-section, .prayer-section {
+                padding: 15px;
+            }
+            
+            .agenda-table td {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .agenda-table td::before {
+                margin-bottom: 5px;
             }
         }
         
@@ -263,8 +346,11 @@
     <div class="container">
         <header>
             <div class="logo-container">
-                <div class="logo">SON</div>
-                <div>
+                <div class="logo">
+                    <!-- Replace with your actual logo file path -->
+                    <img src="/MANCAP1.png" alt="SON Logo">
+                </div>
+                <div class="header-text">
                     <h1>STANDARDS ORGANISATION OF NIGERIA</h1>
                     <div class="meeting-title">Meeting with Operators of the Special Economic Zones</div>
                     <p>Tuesday, 7th October, 2025</p>
@@ -302,73 +388,73 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td class="time-cell">9:30 AM</td>
-                            <td>Welcoming/Registration</td>
-                            <td class="action-cell">All</td>
+                            <td data-label="S/N">1</td>
+                            <td class="time-cell" data-label="Time">9:30 AM</td>
+                            <td data-label="Agenda">Welcoming/Registration</td>
+                            <td class="action-cell" data-label="Action">All</td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td class="time-cell">10:00 AM</td>
-                            <td>Opening Prayer (3rd Stanza of National Anthem)</td>
-                            <td class="action-cell">All</td>
+                            <td data-label="S/N">2</td>
+                            <td class="time-cell" data-label="Time">10:00 AM</td>
+                            <td data-label="Agenda">Opening Prayer (3rd Stanza of National Anthem)</td>
+                            <td class="action-cell" data-label="Action">All</td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td class="time-cell">10:05 AM</td>
-                            <td>Introduction of Participants</td>
-                            <td class="action-cell">All</td>
+                            <td data-label="S/N">3</td>
+                            <td class="time-cell" data-label="Time">10:05 AM</td>
+                            <td data-label="Agenda">Introduction of Participants</td>
+                            <td class="action-cell" data-label="Action">All</td>
                         </tr>
                         <tr>
-                            <td>4</td>
-                            <td class="time-cell">10:20 AM</td>
-                            <td>Welcome Address by the Director General/Chief Executive, SON</td>
-                            <td class="action-cell">Director General/CE, SON</td>
+                            <td data-label="S/N">4</td>
+                            <td class="time-cell" data-label="Time">10:20 AM</td>
+                            <td data-label="Agenda">Welcome Address by the Director General/Chief Executive, SON</td>
+                            <td class="action-cell" data-label="Action">Director General/CE, SON</td>
                         </tr>
                         <tr>
-                            <td>5</td>
-                            <td class="time-cell">10:35 AM</td>
-                            <td>Goodwill Message</td>
-                            <td class="action-cell">Managing Director - Nigeria Export Processing Zones Authority, NEPZA</td>
+                            <td data-label="S/N">5</td>
+                            <td class="time-cell" data-label="Time">10:35 AM</td>
+                            <td data-label="Agenda">Goodwill Message</td>
+                            <td class="action-cell" data-label="Action">Managing Director - Nigeria Export Processing Zones Authority, NEPZA</td>
                         </tr>
                         <tr>
-                            <td>6</td>
-                            <td class="time-cell">10:45 AM</td>
-                            <td>Group Photograph</td>
-                            <td class="action-cell">All</td>
+                            <td data-label="S/N">6</td>
+                            <td class="time-cell" data-label="Time">10:45 AM</td>
+                            <td data-label="Agenda">Group Photograph</td>
+                            <td class="action-cell" data-label="Action">All</td>
                         </tr>
                         <tr>
-                            <td>7</td>
-                            <td class="time-cell">11:00 AM</td>
-                            <td>
+                            <td data-label="S/N">7</td>
+                            <td class="time-cell" data-label="Time">11:00 AM</td>
+                            <td data-label="Agenda">
                                 <strong>Presentations on:</strong><br>
                                 • Special Economic Zones Conformity Assessment Programme Scheme (SEZCAP)<br>
                                 • SON Services<br>
                                 • Registration of Enterprises on the E-SEZCAP Platform
                             </td>
-                            <td class="action-cell">
+                            <td class="action-cell" data-label="Action">
                                 Head (SEZCAP)<br>
                                 Head (Marketing Department)<br>
                                 SON ICT
                             </td>
                         </tr>
                         <tr>
-                            <td>8</td>
-                            <td class="time-cell">11:30 AM</td>
-                            <td>Questions and Feedback from participants</td>
-                            <td class="action-cell">All</td>
+                            <td data-label="S/N">8</td>
+                            <td class="time-cell" data-label="Time">11:30 AM</td>
+                            <td data-label="Agenda">Questions and Feedback from participants</td>
+                            <td class="action-cell" data-label="Action">All</td>
                         </tr>
                         <tr>
-                            <td>9</td>
-                            <td class="time-cell">12:30 PM</td>
-                            <td>Vote of thanks</td>
-                            <td class="action-cell">HoD (National Product Certification Department)</td>
+                            <td data-label="S/N">9</td>
+                            <td class="time-cell" data-label="Time">12:30 PM</td>
+                            <td data-label="Agenda">Vote of thanks</td>
+                            <td class="action-cell" data-label="Action">HoD (National Product Certification Department)</td>
                         </tr>
                         <tr>
-                            <td>10</td>
-                            <td class="time-cell">12:30 PM</td>
-                            <td>Refreshments</td>
-                            <td class="action-cell">All</td>
+                            <td data-label="S/N">10</td>
+                            <td class="time-cell" data-label="Time">12:30 PM</td>
+                            <td data-label="Agenda">Refreshments</td>
+                            <td class="action-cell" data-label="Action">All</td>
                         </tr>
                     </tbody>
                 </table>
@@ -376,4 +462,83 @@
             
             <div class="prayer-section">
                 <h2 class="prayer-title"><i class="fas fa-pray"></i> National Prayer</h2>
-                <div class="
+                <div class="prayer-content">
+                    <div class="prayer-text">
+                        <p>O God of creation, direct our noble cause;</p>
+                        <p>Guide our leaders right:</p>
+                        <p>Help our youth the truth to know,</p>
+                        <p>In love and honesty to grow,</p>
+                        <p>And living just and true,</p>
+                        <p>Great lofty heights attain,</p>
+                        <p>To build a nation where peace and justice shall reign.</p>
+                    </div>
+                    <div class="prayer-text">
+                        <p><strong>Third Stanza of Nigerian National Anthem:</strong></p>
+                        <p>O God of creation,</p>
+                        <p>Direct our noble cause;</p>
+                        <p>Guide our Leaders right:</p>
+                        <p>Help our Youth the truth to know,</p>
+                        <p>In love and honesty to grow,</p>
+                        <p>And living just and true,</p>
+                        <p>Great lofty heights attain,</p>
+                        <p>To build a nation where peace and justice shall reign.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p><span class="footer-logo">STANDARDS ORGANISATION OF NIGERIA</span> | Promoting Quality Standards for National Development</p>
+            <p>© 2025 - All Rights Reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add subtle animation to table rows
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableRows = document.querySelectorAll('.agenda-table tbody tr');
+            
+            tableRows.forEach((row, index) => {
+                // Add delay for staggered animation
+                row.style.opacity = '0';
+                row.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    row.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+            
+            // Highlight current time if meeting is today
+            const today = new Date();
+            const meetingDate = new Date('October 7, 2025');
+            
+            if (today.toDateString() === meetingDate.toDateString()) {
+                const currentTime = today.getHours() * 60 + today.getMinutes();
+                const timeCells = document.querySelectorAll('.time-cell');
+                
+                timeCells.forEach(cell => {
+                    const timeText = cell.textContent;
+                    const [time, modifier] = timeText.split(' ');
+                    let [hours, minutes] = time.split(':');
+                    
+                    hours = parseInt(hours);
+                    minutes = parseInt(minutes);
+                    
+                    // Convert to 24-hour format
+                    if (modifier === 'PM' && hours < 12) hours += 12;
+                    if (modifier === 'AM' && hours === 12) hours = 0;
+                    
+                    const cellTime = hours * 60 + minutes;
+                    
+                    if (cellTime <= currentTime && currentTime < cellTime + 30) {
+                        cell.parentElement.style.backgroundColor = 'rgba(0, 100, 0, 0.1)';
+                        cell.parentElement.style.borderLeft = '4px solid var(--son-gold)';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
